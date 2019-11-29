@@ -11,6 +11,7 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 export namespace Components {
   interface UcSideDrawer {
     'open': boolean;
+    'openSideDrawer': () => Promise<void>;
     'title': string;
   }
 }
