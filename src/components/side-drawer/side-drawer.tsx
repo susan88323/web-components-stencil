@@ -8,7 +8,11 @@ import { Component, Prop, h } from '@stencil/core';
 export class SideDrawer {
     // with reflect true, the attribute will be updated whenever the prop changes
     @Prop({reflect: true}) title: string;
-    // @Prop() open: boolean;
+    @Prop({reflect: true, mutable: true}) open: boolean;
+
+    onCloseDrawer() {
+        this.open = false;
+    }
 
     render() {
         // let content = null;
@@ -24,7 +28,10 @@ export class SideDrawer {
         // }
         return (
             <aside>
-                <header><h1>{this.title}</h1></header>
+                <header>
+                    <h1>{this.title}</h1>
+                    <button onClick={this.onCloseDrawer.bind(this)}>X</button>
+                </header>
                 <main>
                     <slot />
                 </main>
