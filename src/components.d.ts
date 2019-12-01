@@ -52,7 +52,9 @@ declare namespace LocalJSX {
     'open'?: boolean;
     'title'?: string;
   }
-  interface UcStockFinder extends JSXBase.HTMLAttributes<HTMLUcStockFinderElement> {}
+  interface UcStockFinder extends JSXBase.HTMLAttributes<HTMLUcStockFinderElement> {
+    'onUcSymbolSelected'?: (event: CustomEvent<string>) => void;
+  }
   interface UcStockPrice extends JSXBase.HTMLAttributes<HTMLUcStockPriceElement> {
     'stockSymbol'?: string;
   }
