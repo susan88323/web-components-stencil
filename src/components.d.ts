@@ -14,6 +14,9 @@ export namespace Components {
     'openSideDrawer': () => Promise<void>;
     'title': string;
   }
+  interface UcStockPrice {
+    'stockSymbol': string;
+  }
 }
 
 declare global {
@@ -24,8 +27,15 @@ declare global {
     prototype: HTMLUcSideDrawerElement;
     new (): HTMLUcSideDrawerElement;
   };
+
+  interface HTMLUcStockPriceElement extends Components.UcStockPrice, HTMLStencilElement {}
+  var HTMLUcStockPriceElement: {
+    prototype: HTMLUcStockPriceElement;
+    new (): HTMLUcStockPriceElement;
+  };
   interface HTMLElementTagNameMap {
     'uc-side-drawer': HTMLUcSideDrawerElement;
+    'uc-stock-price': HTMLUcStockPriceElement;
   }
 }
 
@@ -34,9 +44,13 @@ declare namespace LocalJSX {
     'open'?: boolean;
     'title'?: string;
   }
+  interface UcStockPrice extends JSXBase.HTMLAttributes<HTMLUcStockPriceElement> {
+    'stockSymbol'?: string;
+  }
 
   interface IntrinsicElements {
     'uc-side-drawer': UcSideDrawer;
+    'uc-stock-price': UcStockPrice;
   }
 }
 
