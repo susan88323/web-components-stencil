@@ -1,4 +1,4 @@
-import { Component, h, State, Element, Prop } from '@stencil/core';
+import { Component, h, State, Element, Prop, Watch } from '@stencil/core';
 
 import { AV_API_KEY } from '../../global/global';
 
@@ -9,13 +9,23 @@ import { AV_API_KEY } from '../../global/global';
 })
 export class StockPrice {
     stockInput: HTMLInputElement;
+    // initialStockSymbol: string;
+
     @Element() el: HTMLElement;
     @State() fetchedPrice: number;
     @State() stockUserInput: string; // Set two way binding
     @State() stockInputValid = false;
     @State() error: string;
 
-    @Prop() stockSymbol: string;
+    @Prop({mutable: true, reflect: true}) stockSymbol: string;
+
+    @Watch('stockSymbol')
+    stockSymbolChanged(newValue: string, oldValue: string) {
+        if (newValue !== oldValue) {
+            this.stockUserInput = newValue;
+            this.fetchStockPrice(newValue);
+        }
+    }
 
     onUserInput(event: Event) {
         this.stockUserInput = (event.target as HTMLInputElement).value;
@@ -31,14 +41,39 @@ export class StockPrice {
         // When using @Element()
         // const stockSymbol = (this.el.shadowRoot.querySelector('#stock-symbol') as HTMLInputElement).value;
         // When using ref
-        const stockSymbol = this.stockInput.value;
-        this.fetchStockPrice(stockSymbol);
+        this.stockSymbol = this.stockInput.value;
+        // this.fetchStockPrice(stockSymbol); // The fetch will be auto triggered when using @Watch
+    }
+
+    // Run before the render function
+    componentWillLoad() {
+        console.log('componentWillLoad');
     }
 
     componentDidLoad() {
+        console.log('componentDidLoad');
         if (this.stockSymbol) {
+            // this.initialStockSymbol = this.stockSymbol;
+            this.stockUserInput = this.stockSymbol;
+            this.stockInputValid = true;
             this.fetchStockPrice(this.stockSymbol);
         }
+    }
+
+    componentWillUpdate() {
+        console.log('componentWillUpdate');
+    }
+
+    componentDidUpdate() {
+        console.log('componentDidUpdate');
+        // if (this.stockSymbol !== this.initialStockSymbol) {
+        //     this.initialStockSymbol = this.stockSymbol;
+        //     this.fetchStockPrice(this.stockSymbol);
+        // }
+    }
+
+    componentDidUnload() {
+        console.log('componentDidUnload');
     }
 
     fetchStockPrice(stockSymbol) {
