@@ -14,7 +14,9 @@ export namespace Components {
     'openSideDrawer': () => Promise<void>;
     'title': string;
   }
-  interface UcStockPrice {}
+  interface UcStockPrice {
+    'stockSymbol': string;
+  }
 }
 
 declare global {
@@ -42,7 +44,9 @@ declare namespace LocalJSX {
     'open'?: boolean;
     'title'?: string;
   }
-  interface UcStockPrice extends JSXBase.HTMLAttributes<HTMLUcStockPriceElement> {}
+  interface UcStockPrice extends JSXBase.HTMLAttributes<HTMLUcStockPriceElement> {
+    'stockSymbol'?: string;
+  }
 
   interface IntrinsicElements {
     'uc-side-drawer': UcSideDrawer;
