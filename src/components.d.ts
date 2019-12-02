@@ -14,6 +14,8 @@ export namespace Components {
     'openSideDrawer': () => Promise<void>;
     'title': string;
   }
+  interface UcSpinner {}
+  interface UcStockFinder {}
   interface UcStockPrice {
     'stockSymbol': string;
   }
@@ -28,6 +30,18 @@ declare global {
     new (): HTMLUcSideDrawerElement;
   };
 
+  interface HTMLUcSpinnerElement extends Components.UcSpinner, HTMLStencilElement {}
+  var HTMLUcSpinnerElement: {
+    prototype: HTMLUcSpinnerElement;
+    new (): HTMLUcSpinnerElement;
+  };
+
+  interface HTMLUcStockFinderElement extends Components.UcStockFinder, HTMLStencilElement {}
+  var HTMLUcStockFinderElement: {
+    prototype: HTMLUcStockFinderElement;
+    new (): HTMLUcStockFinderElement;
+  };
+
   interface HTMLUcStockPriceElement extends Components.UcStockPrice, HTMLStencilElement {}
   var HTMLUcStockPriceElement: {
     prototype: HTMLUcStockPriceElement;
@@ -35,6 +49,8 @@ declare global {
   };
   interface HTMLElementTagNameMap {
     'uc-side-drawer': HTMLUcSideDrawerElement;
+    'uc-spinner': HTMLUcSpinnerElement;
+    'uc-stock-finder': HTMLUcStockFinderElement;
     'uc-stock-price': HTMLUcStockPriceElement;
   }
 }
@@ -44,12 +60,18 @@ declare namespace LocalJSX {
     'open'?: boolean;
     'title'?: string;
   }
+  interface UcSpinner extends JSXBase.HTMLAttributes<HTMLUcSpinnerElement> {}
+  interface UcStockFinder extends JSXBase.HTMLAttributes<HTMLUcStockFinderElement> {
+    'onUcSymbolSelected'?: (event: CustomEvent<string>) => void;
+  }
   interface UcStockPrice extends JSXBase.HTMLAttributes<HTMLUcStockPriceElement> {
     'stockSymbol'?: string;
   }
 
   interface IntrinsicElements {
     'uc-side-drawer': UcSideDrawer;
+    'uc-spinner': UcSpinner;
+    'uc-stock-finder': UcStockFinder;
     'uc-stock-price': UcStockPrice;
   }
 }

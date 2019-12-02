@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
   <title>Stencil Component Starter</title>
   <style>
+    html {
+      --color-primary: #3b013b;
+      --color-primary-inverse: white;
+    }
+
     body {
       font-family: sans-serif;
     }
@@ -41,6 +46,7 @@
 
 
   <uc-stock-price stock-symbol="AAPL"></uc-stock-price>
+  <uc-stock-finder></uc-stock-finder>
 
   <script>
     const sideDrawerButton = document.querySelector('#side-drawer-btn');
@@ -51,6 +57,11 @@
         sideDrawer.openSideDrawer();
       }
     });
+
+    // const stockFinderEl = document.querySelector('uc-stock-finder');
+    // stockFinderEl.addEventListener('ucSymbolSelected', event => {
+    //   console.log(event);
+    // });
   </script>
 </body>
 </html>
